@@ -232,6 +232,11 @@ elif modulos == "Ejercicio 1":
         
     st.subheader("Registrar movimiento")
 
+    if st.session_state.get("e1_limpiar", False):
+        st.session_state.e1_concepto = ""
+        st.session_state.e1_valor = 0.0
+        st.session_state.e1_limpiar = False
+
     col1, col2, col3 = st.columns(3)
 
     with col1:
@@ -259,8 +264,7 @@ elif modulos == "Ejercicio 1":
     if st.button(
         "➕ Agregar movimiento",
         type="primary",
-        on_click=limpiar_ejercicio_1
-        # key="e1_agregar",
+        key="e1_agregar",
     ):
         if not concepto.strip():
             st.warning("⚠️ Debes ingresar un concepto.")
@@ -291,7 +295,7 @@ elif modulos == "Ejercicio 1":
                         "valor": float(valor)
                     }
                 )
-
+                st.session_state.e1_limpiar = True
                 st.success(
                     f'✅ El concepto "{concepto.strip()}" '
                     "se registró correctamente."
@@ -372,6 +376,8 @@ elif modulos == "Ejercicio 2":
     )
 
     st.subheader("Registrar producto")
+
+
 
     col1, col2 = st.columns(2)
 
