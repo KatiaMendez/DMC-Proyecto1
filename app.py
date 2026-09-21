@@ -705,9 +705,184 @@ else:
             except ValueError as error:
                 mostrar_error(str(error))
 
+    # --------------------------------------------------------
+    # READ
+    # --------------------------------------------------------
+    with tab_leer:
+        st.subheader("Registros del inventario")
+
+        df_inventario = dataframe_inventario()
+
+        if df_inventario.empty:
+            st.info("No existen registros en el inventario.")
+        else:
+            st.dataframe(
+                df_inventario,
+                use_container_width=True,
+                hide_index=True,
+            )
+
+            valor_total = sum(
+                producto.valor_inventario()
+                for producto in st.session_state.inventario_crud
+            )
+
+            st.metric(
+                "Valor total del inventario",
+                f"S/ {valor_total:,.2f}",
+            )
+
+    # --------------------------------------------------------
+    # UPDATE
+    # --------------------------------------------------------
+    with tab_actualizar:
+        st.subheader("Actualizar registro")
+
+        if not st.session_state.inventario_crud:
+            st.info("Primero debes crear al menos un producto.")
+        else:
+            opciones_actualizar = {
+                f"{i + 1} - {producto.nombre}": i
+                for i, producto in enumerate(
+                    st.session_state.inventario_crud
+                )
+            }
+
+            seleccion_actualizar = st.selectbox(
+                "Selecciona el registro a actualizar",
+                list(opciones_actualizar.keys()),
+                key="e4_actualizar_seleccion",
+            )
+
+            indice_actualizar = opciones_actualizar[
+                seleccion_actualizar
+            ]
+
+            producto_actual = st.session_state.inventario_crud[
+                indice_actualizar
+            ]
+
+            col1, col2 = st.columns(2)
+
+            with col1:
+                nuevo_nombre = st.text_input(
+                    "Nombre",
+                    value=producto_actual.nombre,
+                    key="e4_actualizar_nombre",
+                )
+
+                nuevo_costo = st.number_input(
+                    "Costo unitario",
+                    min_value=0.01,
+                    value=float(producto_actual.costo_unitario),
+                    step=10.00,
+                    key="e4_actualizar_costo",
+                )
+
+                nuevo_precio = st.number_input(
+                    "Precio unitario",
+                    min_value=0.01,
+                    value=float(producto_actual.precio_unitario),
+                    step=10.00,
+                    key="e4_actualizar_precio",
+                )
+
+            with col2:
+                nuevo_stock = st.number_input(
+                    "Stock actual",
+                    min_value=0,
+                    value=int(producto_actual.stock_actual),
+                    step=1,
+                    key="e4_actualizar_stock",
+                )
+
+                nuevo_stock_minimo = st.number_input(
+                    "Stock mínimo",
+                    min_value=0,
+                    value=int(producto_actual.stock_minimo),
+                    step=1,
+                    key="e4_actualizar_minimo",
+                )
+
+            if st.button(
+                "✏️ Guardar actualización",
+                type="primary",
+                key="e4_actualizar",
+            ):
+                try:
+                    if not nuevo_nombre.strip():
+                        raise ValueError(
+                            "El nombre del producto es obligatorio."
+                        )
+
+                    producto_actualizado = InventarioProducto(
+                        nombre=nuevo_nombre.strip(),
+                        costo_unitario=float(nuevo_costo),
+                        precio_unitario=float(nuevo_precio),
+                        stock_actual=int(nuevo_stock),
+                        stock_minimo=int(nuevo_stock_minimo),
+                    )
+
+                    st.session_state.inventario_crud[
+                        indice_actualizar
+                    ] = producto_actualizado
+
+                    st.success(
+                        "Registro actualizado correctamente."
+                    )
+
+                except ValueError as error:
+                    mostrar_error(str(error))
+
+    # --------------------------------------------------------
+    # DELETE
+    # --------------------------------------------------------
+    with tab_eliminar:
+        st.subheader("Eliminar registro")
+
+        if not st.session_state.inventario_crud:
+            st.info("No existen registros para eliminar.")
+        else:
+            opciones_eliminar = {
+                f"{i + 1} - {producto.nombre}": i
+                for i, producto in enumerate(
+                    st.session_state.inventario_crud
+                )
+            }
+
+            seleccion_eliminar = st.selectbox(
+                "Selecciona el registro a eliminar",
+                list(opciones_eliminar.keys()),
+                key="e4_eliminar_seleccion",
+            )
+
+            indice_eliminar = opciones_eliminar[
+                seleccion_eliminar
+            ]
+
+            producto_eliminar = st.session_state.inventario_crud[
+                indice_eliminar
+            ]
+
+            st.warning(
+                f"Vas a eliminar el producto "
+                f"**{producto_eliminar.nombre}**."
+            )
+
+            if st.button(
+                "🗑️ Eliminar registro",
+                type="primary",
+                key="e4_eliminar",
+            ):
+                st.session_state.inventario_crud.pop(indice_eliminar)
+                st.success("Registro eliminado correctamente.")
+                st.rerun()
 
 
-
-
-
-
+# ============================================================
+# PIE DE PÁGINA
+# ============================================================
+st.sidebar.markdown("---")
+st.sidebar.caption(
+    "Proyecto 1 · Python Fundamentals · Streamlit"
+)
