@@ -60,9 +60,9 @@ if modulos == "Home":
 
     with col1:
         st.markdown("### 👤 Datos del estudiante")
-        st.write(f"**Nombre:** {NOMBRE_ESTUDIANTE}")
+        st.write(f"**Nombre:** Katia Roxana Mendez Cortez")
         st.write("**Módulo:** Python Fundamentals")
-        st.write(f"**Año:** {ANIO_PROYECTO}")
+        st.write(f"**Año:** 2026")
 
     with col2:
         st.markdown("### 🛠️ Tecnologías utilizadas")
