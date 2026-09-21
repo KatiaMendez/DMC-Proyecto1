@@ -21,8 +21,17 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-
-modulos = st.sidebar.selectbox("Selecione el módulo",["Home", "Ejercicio 1", "Ejercicio 2", "Ejercicio 3", "Ejercicio 4"])
+# ============================================================
+# SIDEBAR / NAVEGACIÓN
+# ============================================================
+st.sidebar.title("🐍 Python Fundamentals")
+st.sidebar.markdown("---")
+modulos = st.sidebar.selectbox("Menú principal",["Home", "Ejercicio 1", "Ejercicio 2", "Ejercicio 3", "Ejercicio 4"])
+st.sidebar.markdown("---")
+st.sidebar.caption(
+    "Proyecto Aplicado en Streamlit\n"
+    "Módulo 1 – Python Fundamentals"
+)
 
 # ============================================================
 # HOME
@@ -34,10 +43,10 @@ elif modulos == "Ejercicio 1":
   st.title("EJERCICIO 1")
 
 elif modulos == "Ejercicio 2":
-  st.write("Te encuentras en el módulo de Funciones")
+  st.write("EJERCICIO 2")
   
 elif modulos == "Ejercicio 3":
-  st.write("Te encuentras en el módulo de Funciones")
+  st.write("EJERCICIO 3")
 
 else:
-  st.write("Te encuentras en el Ejercicio 4")
+  st.write("EJERCICIO 4")
