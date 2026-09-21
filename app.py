@@ -328,13 +328,382 @@ elif modulos == "Ejercicio 1":
 # ============================================================
 
 elif modulos == "Ejercicio 2":
-  st.write("EJERCICIO 2")
-  
+    st.title("📊 Ejercicio 2 – Registro con NumPy, arrays y DataFrame")
+
+    st.markdown(
+        """
+        Este ejercicio utiliza **arrays de NumPy** para almacenar
+        los registros y posteriormente convierte dichos arrays en
+        un **DataFrame de Pandas** para su visualización.
+        """
+    )
+
+    st.subheader("Registrar producto")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        nombre_producto = st.text_input(
+            "Nombre del producto",
+            placeholder="Ej. Laptop",
+            key="e2_nombre",
+        )
+
+        categoria = st.selectbox(
+            "Categoría",
+            [
+                "Tecnología",
+                "Oficina",
+                "Hogar",
+                "Servicios",
+                "Otros",
+            ],
+            key="e2_categoria",
+        )
+
+    with col2:
+        precio = st.number_input(
+            "Precio unitario",
+            min_value=0.01,
+            value=100.00,
+            step=10.00,
+            key="e2_precio",
+        )
+
+        cantidad = st.number_input(
+            "Cantidad",
+            min_value=1,
+            value=1,
+            step=1,
+            key="e2_cantidad",
+        )
+
+    total = precio * cantidad
+    st.info(f"Total calculado: **S/ {total:,.2f}**")
+
+    if st.button(
+        "➕ Agregar producto",
+        type="primary",
+        key="e2_agregar",
+    ):
+        if not nombre_producto.strip():
+            mostrar_error("Ingresa el nombre del producto.")
+        else:
+            datos = st.session_state.productos
+
+            datos["nombre"] = np.append(
+                datos["nombre"], nombre_producto.strip()
+            )
+            datos["categoria"] = np.append(
+                datos["categoria"], categoria
+            )
+            datos["precio"] = np.append(
+                datos["precio"], float(precio)
+            )
+            datos["cantidad"] = np.append(
+                datos["cantidad"], int(cantidad)
+            )
+            datos["total"] = np.append(
+                datos["total"], float(total)
+            )
+
+            st.success("Producto agregado correctamente.")
+
+    st.markdown("---")
+    st.subheader("DataFrame actualizado")
+
+    df_productos = dataframe_productos()
+
+    if df_productos.empty:
+        st.info("Todavía no existen productos registrados.")
+    else:
+        st.dataframe(
+            df_productos,
+            use_container_width=True,
+            hide_index=True,
+        )
+
+        st.metric(
+            "Valor total registrado",
+            f"S/ {df_productos['Total'].sum():,.2f}",
+        )
+
+    st.markdown("---")
+
+    if st.button("🗑️ Limpiar productos", key="e2_limpiar"):
+        st.session_state.productos = {
+            "nombre": np.array([], dtype=str),
+            "categoria": np.array([], dtype=str),
+            "precio": np.array([], dtype=float),
+            "cantidad": np.array([], dtype=int),
+            "total": np.array([], dtype=float),
+        }
+        st.rerun()
+
+
+
+# ============================================================
+# EJERCICIO 3
+# ============================================================
+
 elif modulos == "Ejercicio 3":
-  st.write("EJERCICIO 3")
+    st.title("📈 Ejercicio 3 – Función desde una librería externa")
+
+    st.markdown(
+        """
+        Para este ejercicio se utiliza una función importada desde
+        **libreria_funciones_proyecto1.py**.
+
+        La función seleccionada corresponde al cálculo del
+        **punto de equilibrio**, una métrica utilizada en análisis
+        de negocios.
+        """
+    )
+
+    st.subheader("Selección de función")
+
+    funcion_seleccionada = st.selectbox(
+        "Selecciona la función",
+        ["Calcular punto de equilibrio"],
+        key="e3_funcion",
+    )
+
+    if funcion_seleccionada == "Calcular punto de equilibrio":
+        st.markdown(
+            """
+            **Fórmulas utilizadas por la librería:**
+
+            - Margen de contribución = Precio unitario − Costo variable unitario
+            - Punto de equilibrio (unidades) =
+              Costos fijos / Margen de contribución
+            - Punto de equilibrio (ventas) =
+              Unidades de equilibrio × Precio unitario
+            """
+        )
+
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            costos_fijos = st.number_input(
+                "Costos fijos",
+                min_value=0.01,
+                value=10000.00,
+                step=500.00,
+                key="e3_costos_fijos",
+            )
+
+        with col2:
+            precio_unitario = st.number_input(
+                "Precio unitario",
+                min_value=0.01,
+                value=100.00,
+                step=5.00,
+                key="e3_precio",
+            )
+
+        with col3:
+            costo_variable_unitario = st.number_input(
+                "Costo variable unitario",
+                min_value=0.00,
+                value=40.00,
+                step=5.00,
+                key="e3_costo_variable",
+            )
+
+        if st.button(
+            "▶️ Ejecutar función",
+            type="primary",
+            key="e3_ejecutar",
+        ):
+            try:
+                resultado = calcular_punto_equilibrio(
+                    costos_fijos=costos_fijos,
+                    precio_unitario=precio_unitario,
+                    costo_variable_unitario=costo_variable_unitario,
+                )
+
+                registro = {
+                    "Función": funcion_seleccionada,
+                    "Costos fijos": costos_fijos,
+                    "Precio unitario": precio_unitario,
+                    "Costo variable unitario": costo_variable_unitario,
+                    "Margen contribución": resultado[
+                        "margen_contribucion_unitario"
+                    ],
+                    "Punto equilibrio unidades": resultado[
+                        "punto_equilibrio_unidades"
+                    ],
+                    "Punto equilibrio ventas": resultado[
+                        "punto_equilibrio_ventas"
+                    ],
+                }
+
+                st.session_state.historial_punto_equilibrio.append(
+                    registro
+                )
+
+                st.success("Función ejecutada correctamente.")
+
+                col1, col2, col3 = st.columns(3)
+
+                with col1:
+                    st.metric(
+                        "Margen de contribución",
+                        f"S/ {resultado['margen_contribucion_unitario']:,.2f}",
+                    )
+
+                with col2:
+                    st.metric(
+                        "Punto de equilibrio",
+                        f"{resultado['punto_equilibrio_unidades']:,.2f} unidades",
+                    )
+
+                with col3:
+                    st.metric(
+                        "Ventas de equilibrio",
+                        f"S/ {resultado['punto_equilibrio_ventas']:,.2f}",
+                    )
+
+            except ValueError as error:
+                mostrar_error(str(error))
+
+    st.markdown("---")
+    st.subheader("📋 Histórico de resultados")
+
+    if st.session_state.historial_punto_equilibrio:
+        df_historial = pd.DataFrame(
+            st.session_state.historial_punto_equilibrio
+        )
+
+        st.dataframe(
+            df_historial,
+            use_container_width=True,
+            hide_index=True,
+        )
+    else:
+        st.info("Todavía no se ha ejecutado la función.")
+
+    if st.button("🗑️ Limpiar histórico", key="e3_limpiar"):
+        st.session_state.historial_punto_equilibrio = []
+        st.rerun()
+
+
+# ============================================================
+# EJERCICIO 4
+# ============================================================
 
 else:
-  st.write("EJERCICIO 4")
+    st.title("📦 Ejercicio 4 – Clase externa con CRUD")
+
+    st.markdown(
+        """
+        Para este ejercicio se utiliza la clase
+        **InventarioProducto** de la librería
+        **librería_clases_proyecto1.py**.
+
+        Se implementan las cuatro operaciones básicas de un CRUD:
+
+        - **Crear:** registrar un producto.
+        - **Leer:** visualizar los productos registrados.
+        - **Actualizar:** modificar un producto.
+        - **Eliminar:** eliminar un producto.
+        """
+    )
+
+    st.subheader("Selección de clase")
+
+    clase_seleccionada = st.selectbox(
+        "Selecciona la clase",
+        ["InventarioProducto"],
+        key="e4_clase",
+    )
+
+    st.caption(
+        "Clase seleccionada: "
+        f"**{clase_seleccionada}**. Permite calcular valor de "
+        "inventario, margen unitario, margen porcentual y necesidad "
+        "de reposición."
+    )
+
+    tab_crear, tab_leer, tab_actualizar, tab_eliminar = st.tabs(
+        ["➕ Crear", "📖 Leer", "✏️ Actualizar", "🗑️ Eliminar"]
+    )
+
+    # --------------------------------------------------------
+    # CREATE
+    # --------------------------------------------------------
+    with tab_crear:
+        st.subheader("Crear nuevo producto")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            nombre = st.text_input(
+                "Nombre del producto",
+                placeholder="Ej. Monitor",
+                key="e4_crear_nombre",
+            )
+
+            costo_unitario = st.number_input(
+                "Costo unitario",
+                min_value=0.01,
+                value=100.00,
+                step=10.00,
+                key="e4_crear_costo",
+            )
+
+            precio_unitario = st.number_input(
+                "Precio unitario",
+                min_value=0.01,
+                value=150.00,
+                step=10.00,
+                key="e4_crear_precio",
+            )
+
+        with col2:
+            stock_actual = st.number_input(
+                "Stock actual",
+                min_value=0,
+                value=10,
+                step=1,
+                key="e4_crear_stock",
+            )
+
+            stock_minimo = st.number_input(
+                "Stock mínimo",
+                min_value=0,
+                value=5,
+                step=1,
+                key="e4_crear_minimo",
+            )
+
+        if st.button(
+            "💾 Crear registro",
+            type="primary",
+            key="e4_crear",
+        ):
+            try:
+                if not nombre.strip():
+                    raise ValueError(
+                        "El nombre del producto es obligatorio."
+                    )
+
+                nuevo_producto = InventarioProducto(
+                    nombre=nombre.strip(),
+                    costo_unitario=float(costo_unitario),
+                    precio_unitario=float(precio_unitario),
+                    stock_actual=int(stock_actual),
+                    stock_minimo=int(stock_minimo),
+                )
+
+                st.session_state.inventario_crud.append(
+                    nuevo_producto
+                )
+
+                st.success("Registro creado correctamente.")
+
+            except ValueError as error:
+                mostrar_error(str(error))
 
 
 
