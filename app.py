@@ -211,6 +211,10 @@ if modulos == "Home":
 # EJERCICIO 1
 # ============================================================
 
+def limpiar_ejercicio_1():
+    st.session_state.e1_concepto = ""
+    st.session_state.e1_valor = 0.0
+    
 elif modulos == "Ejercicio 1":
 
     if "movimientos" not in st.session_state:
@@ -255,7 +259,8 @@ elif modulos == "Ejercicio 1":
     if st.button(
         "➕ Agregar movimiento",
         type="primary",
-        key="e1_agregar",
+        on_click=limpiar_ejercicio_1
+        # key="e1_agregar",
     ):
         if not concepto.strip():
             st.warning("⚠️ Debes ingresar un concepto.")
@@ -286,11 +291,6 @@ elif modulos == "Ejercicio 1":
                         "valor": float(valor)
                     }
                 )
-
-                # Limpiar los campos después de guardar
-                st.session_state.e1_concepto = ""
-                st.session_state.e1_valor = 0.0
-                st.session_state.e1_tipo = "Ingreso"
 
                 st.success(
                     f'✅ El concepto "{concepto.strip()}" '
