@@ -44,11 +44,11 @@ if modulos == "Home":
     st.markdown("---")
 
 
-        st.markdown("### 👤 Datos del estudiante")
-        st.write(f"**Nombre:** Katia Roxana Mendez Cortez")
-        st.write("**Módulo:** Python Fundamentals")
-        
-        st.write(f"**Año:** 2026")
+    st.markdown("### 👤 Datos del estudiante")
+    st.write(f"**Nombre:** Katia Roxana Mendez Cortez")
+    st.write("**Módulo:** Python Fundamentals")
+    
+    st.write(f"**Año:** 2026")
 
     st.markdown("---")
 
