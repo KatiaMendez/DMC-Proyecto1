@@ -312,11 +312,11 @@ elif modulos == "Ejercicio 1":
         )
 
         ingresos = df_movimientos.loc[
-            df_movimientos["tipo"] == "Ingreso", "Valor"
+            df_movimientos["tipo"] == "Ingreso", "valor"
         ].sum()
 
         gastos = df_movimientos.loc[
-            df_movimientos["tipo"] == "Gasto", "Valor"
+            df_movimientos["tipo"] == "Gasto", "valor"
         ].sum()
 
         saldo = ingresos - gastos
