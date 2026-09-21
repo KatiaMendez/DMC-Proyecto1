@@ -22,6 +22,109 @@ st.set_page_config(
 )
 
 # ============================================================
+# INICIALIZACIÓN DEL ESTADO DE LA APLICACIÓN
+# ============================================================
+def inicializar_estado():
+    """Crea las estructuras necesarias en st.session_state."""
+
+    if "movimientos" not in st.session_state:
+        st.session_state.movimientos = []
+
+    if "productos" not in st.session_state:
+        st.session_state.productos = {
+            "nombre": np.array([], dtype=str),
+            "categoria": np.array([], dtype=str),
+            "precio": np.array([], dtype=float),
+            "cantidad": np.array([], dtype=int),
+            "total": np.array([], dtype=float),
+        }
+
+    if "historial_punto_equilibrio" not in st.session_state:
+        st.session_state.historial_punto_equilibrio = []
+
+    if "inventario_crud" not in st.session_state:
+        st.session_state.inventario_crud = []
+
+
+inicializar_estado()
+
+
+# ============================================================
+# FUNCIONES AUXILIARES DE LA APP
+# ============================================================
+def mostrar_error(mensaje):
+    """Muestra un mensaje de error uniforme."""
+    st.error(f"⚠️ {mensaje}")
+
+
+def dataframe_movimientos():
+    """Convierte la lista de movimientos en DataFrame."""
+    if not st.session_state.movimientos:
+        return pd.DataFrame(columns=["Concepto", "Tipo", "Valor"])
+
+    return pd.DataFrame(st.session_state.movimientos)
+
+
+def dataframe_productos():
+    """Convierte los arrays de productos en DataFrame."""
+    datos = st.session_state.productos
+
+    return pd.DataFrame(
+        {
+            "Producto": datos["nombre"],
+            "Categoría": datos["categoria"],
+            "Precio": datos["precio"],
+            "Cantidad": datos["cantidad"],
+            "Total": datos["total"],
+        }
+    )
+
+
+def dataframe_inventario():
+    """Genera el DataFrame de los objetos InventarioProducto."""
+    if not st.session_state.inventario_crud:
+        return pd.DataFrame(
+            columns=[
+                "ID",
+                "Producto",
+                "Costo unitario",
+                "Precio unitario",
+                "Stock actual",
+                "Stock mínimo",
+                "Valor inventario",
+                "Margen unitario",
+                "Margen %",
+                "Reposición",
+            ]
+        )
+
+    registros = []
+
+    for indice, producto in enumerate(
+        st.session_state.inventario_crud, start=1
+    ):
+        resumen = producto.resumen()
+
+        registros.append(
+            {
+                "ID": indice,
+                "Producto": resumen["producto"],
+                "Costo unitario": producto.costo_unitario,
+                "Precio unitario": producto.precio_unitario,
+                "Stock actual": resumen["stock_actual"],
+                "Stock mínimo": producto.stock_minimo,
+                "Valor inventario": resumen["valor_inventario"],
+                "Margen unitario": resumen["margen_unitario"],
+                "Margen %": resumen["margen_pct"],
+                "Reposición": (
+                    "Sí" if resumen["necesita_reposicion"] else "No"
+                ),
+            }
+        )
+
+    return pd.DataFrame(registros)
+
+# ============================================================
 # SIDEBAR / NAVEGACIÓN
 # ============================================================
 st.sidebar.title("Python Fundamentals")
@@ -237,106 +340,5 @@ else:
 
 
 
-# ============================================================
-# INICIALIZACIÓN DEL ESTADO DE LA APLICACIÓN
-# ============================================================
-def inicializar_estado():
-    """Crea las estructuras necesarias en st.session_state."""
 
-    if "movimientos" not in st.session_state:
-        st.session_state.movimientos = []
-
-    if "productos" not in st.session_state:
-        st.session_state.productos = {
-            "nombre": np.array([], dtype=str),
-            "categoria": np.array([], dtype=str),
-            "precio": np.array([], dtype=float),
-            "cantidad": np.array([], dtype=int),
-            "total": np.array([], dtype=float),
-        }
-
-    if "historial_punto_equilibrio" not in st.session_state:
-        st.session_state.historial_punto_equilibrio = []
-
-    if "inventario_crud" not in st.session_state:
-        st.session_state.inventario_crud = []
-
-
-inicializar_estado()
-
-
-# ============================================================
-# FUNCIONES AUXILIARES DE LA APP
-# ============================================================
-def mostrar_error(mensaje):
-    """Muestra un mensaje de error uniforme."""
-    st.error(f"⚠️ {mensaje}")
-
-
-def dataframe_movimientos():
-    """Convierte la lista de movimientos en DataFrame."""
-    if not st.session_state.movimientos:
-        return pd.DataFrame(columns=["Concepto", "Tipo", "Valor"])
-
-    return pd.DataFrame(st.session_state.movimientos)
-
-
-def dataframe_productos():
-    """Convierte los arrays de productos en DataFrame."""
-    datos = st.session_state.productos
-
-    return pd.DataFrame(
-        {
-            "Producto": datos["nombre"],
-            "Categoría": datos["categoria"],
-            "Precio": datos["precio"],
-            "Cantidad": datos["cantidad"],
-            "Total": datos["total"],
-        }
-    )
-
-
-def dataframe_inventario():
-    """Genera el DataFrame de los objetos InventarioProducto."""
-    if not st.session_state.inventario_crud:
-        return pd.DataFrame(
-            columns=[
-                "ID",
-                "Producto",
-                "Costo unitario",
-                "Precio unitario",
-                "Stock actual",
-                "Stock mínimo",
-                "Valor inventario",
-                "Margen unitario",
-                "Margen %",
-                "Reposición",
-            ]
-        )
-
-    registros = []
-
-    for indice, producto in enumerate(
-        st.session_state.inventario_crud, start=1
-    ):
-        resumen = producto.resumen()
-
-        registros.append(
-            {
-                "ID": indice,
-                "Producto": resumen["producto"],
-                "Costo unitario": producto.costo_unitario,
-                "Precio unitario": producto.precio_unitario,
-                "Stock actual": resumen["stock_actual"],
-                "Stock mínimo": producto.stock_minimo,
-                "Valor inventario": resumen["valor_inventario"],
-                "Margen unitario": resumen["margen_unitario"],
-                "Margen %": resumen["margen_pct"],
-                "Reposición": (
-                    "Sí" if resumen["necesita_reposicion"] else "No"
-                ),
-            }
-        )
-
-    return pd.DataFrame(registros)
 
