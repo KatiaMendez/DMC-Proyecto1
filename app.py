@@ -54,7 +54,7 @@ if modulos == "Home":
 
     st.markdown(
         """
-        ### 📌 Descripción del proyecto
+        ### 🛠️ Descripción del proyecto
 
         Esta aplicación integra los principales conceptos trabajados
         durante el Módulo 1 de Python Fundamentals.
@@ -101,7 +101,7 @@ if modulos == "Home":
 
     st.markdown(
         """
-        ##### Selecciona una opción en el menú lateral para comenzar.
+        ##### 📌 Selecciona una opción en el menú lateral para comenzar.
         """
     )
 
