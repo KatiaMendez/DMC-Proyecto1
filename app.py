@@ -96,11 +96,6 @@ if modulos == "Home":
         """
     )
 
-    st.info(
-        "Antes de publicar en GitHub, reemplaza "
-        "'TU NOMBRE COMPLETO' por tu nombre real."
-    )
-
 
 elif modulos == "Ejercicio 1":
   st.title("EJERCICIO 1")
