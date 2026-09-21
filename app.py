@@ -86,13 +86,13 @@ if modulos == "Home":
         """
     )
 
-        st.markdown("### 🛠️ Tecnologías utilizadas")
-        st.write("• Python")
-        st.write("• Streamlit")
-        st.write("• NumPy")
-        st.write("• Pandas")
-        st.write("• Programación funcional")
-        st.write("• Programación orientada a objetos")
+    st.markdown("### 🛠️ Tecnologías utilizadas")
+    st.write("• Python")
+    st.write("• Streamlit")
+    st.write("• NumPy")
+    st.write("• Pandas")
+    st.write("• Programación funcional")
+    st.write("• Programación orientada a objetos")
 
 
 
