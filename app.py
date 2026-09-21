@@ -228,11 +228,6 @@ elif modulos == "Ejercicio 1":
         
     st.subheader("Registrar movimiento")
 
-    #if st.session_state.get("e1_limpiar", False):
-     #   st.session_state.e1_concepto = ""
-      #  st.session_state.e1_valor = 0.0
-       # st.session_state.e1_limpiar = False
-
     col1, col2, col3 = st.columns(3)
 
     with col1:
@@ -317,11 +312,11 @@ elif modulos == "Ejercicio 1":
         )
 
         ingresos = df_movimientos.loc[
-            df_movimientos["Tipo"] == "Ingreso", "Valor"
+            df_movimientos["tipo"] == "Ingreso", "Valor"
         ].sum()
 
         gastos = df_movimientos.loc[
-            df_movimientos["Tipo"] == "Gasto", "Valor"
+            df_movimientos["tipo"] == "Gasto", "Valor"
         ].sum()
 
         saldo = ingresos - gastos
