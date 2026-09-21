@@ -25,7 +25,7 @@ st.set_page_config(
 # SIDEBAR / NAVEGACIÓN
 # ============================================================
 st.sidebar.title("Python Fundamentals")
-st.sidebar.image("DMC.png")
+st.sidebar.image("LogoKRMC-rectangular.png")
 st.sidebar.markdown("---")
 modulos = st.sidebar.selectbox("Menú principal",["Home", "Ejercicio 1", "Ejercicio 2", "Ejercicio 3", "Ejercicio 4"])
 st.sidebar.markdown("---")
