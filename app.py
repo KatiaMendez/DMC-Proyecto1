@@ -28,10 +28,10 @@ modulos = st.sidebar.selectbox("Selecione el módulo",["Home", "Ejercicio 1", "E
 # HOME
 # ============================================================
 if modulos == "Home":
-  st.write("Te encuentras en el módulo de listas")
+  st.title("HOME")
 
 elif modulos == "Ejercicio 1":
-  st.write("Te encuentras en el módulo de arreglos")
+  st.title("EJERCICIO 1")
 
 elif modulos == "Ejercicio 2":
   st.write("Te encuentras en el módulo de Funciones")
