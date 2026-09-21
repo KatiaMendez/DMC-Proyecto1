@@ -1,3 +1,6 @@
+# ============================================================
+# Importar librerías estándar
+# ============================================================
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -8,9 +11,16 @@ import numpy as np
 from libreria_funciones_proyecto1 import calcular_punto_equilibrio
 from librería_clases_proyecto1 import InventarioProducto
 
-st.title("Especialización Python for Analytics")
-st.sidebar.title("Parámetros")
-st.write("Elaborado por: Katia Mendez")
+# ============================================================
+# CONFIGURACIÓN GENERAL
+# ============================================================
+st.set_page_config(
+    page_title="Proyecto 1 - Python Fundamentals",
+    page_icon="🐍",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
 
 modulos = st.sidebar.selectbox("Selecione el módulo",["Home", "Ejercicio 1", "Ejercicio 2", "Ejercicio 3", "Ejercicio 4"])
 
