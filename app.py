@@ -25,10 +25,9 @@ st.set_page_config(
 # INICIALIZACIÓN DEL ESTADO DE LA APLICACIÓN
 # ============================================================
 def inicializar_estado():
-    """Crea las estructuras necesarias en st.session_state."""
 
     if "movimientos" not in st.session_state:
-        st.session_state.movimientos = []
+        st.session_state.movimientos = [] # Crea una lista vacía
 
     if "productos" not in st.session_state:
         st.session_state.productos = {
@@ -250,6 +249,9 @@ elif modulos == "Ejercicio 1":
             key="e1_valor",
         )
 
+    if "movimientos" not in st.session_state:
+        st.session_state.movimientos = [] # Crea una lista vacía
+        
     if st.button(
         "➕ Agregar movimiento",
         type="primary",
@@ -272,7 +274,7 @@ elif modulos == "Ejercicio 1":
     st.markdown("---")
     st.subheader("Movimientos registrados")
 
-    df_movimientos = dataframe_movimientos()
+    df_movimientos = pd.DataFrame(st.session_state.movimientos)
 
     if df_movimientos.empty:
         st.info("Todavía no se han registrado movimientos.")
@@ -317,7 +319,7 @@ elif modulos == "Ejercicio 1":
 
     st.markdown("---")
 
-    if st.button("🗑️ Limpiar movimientos", key="e1_limpiar"):
+    if st.button("🗑️ Limpiar todos los movimientos", key="e1_limpiar"):
         st.session_state.movimientos = []
         st.rerun()
 
