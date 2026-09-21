@@ -38,36 +38,27 @@ st.sidebar.caption(
 # HOME
 # ============================================================
 if modulos == "Home":
-    st.title("Proyecto 1 – Python Fundamentals")
-    st.image("Python_logo.png",width =100)
+    st.title("Proyecto 1 – Especialización en Python for Analytics")
+    st.subheader("Módulo 1: Python Fundamentals")
+    st.image("Python_logo.png",width =150)
        
     st.markdown("---")
 
-
     st.markdown("### 👤 Datos del estudiante")
     st.write(f"**Nombre:** Katia Roxana Mendez Cortez")
-    st.write("**Módulo:** Python Fundamentals")
-    
+    st.write("**Sobre mí:** Profesional Especialista en Control Interno, que disfruta de aprender tecnología")
     st.write(f"**Año:** 2026")
 
     st.markdown("---")
 
-    st.markdown(
-        """
-        
-        Esta aplicación integra los principales conceptos trabajados
-        durante el Módulo 1 de Python Fundamentals: variables,
-        estructuras de datos, control de flujo, funciones,
-        programación funcional y programación orientada a objetos.
-
-        La aplicación está organizada en cuatro ejercicios prácticos
-        desarrollados con Streamlit.
-        """
-    )
 
     st.markdown(
         """
         ### 📌 Descripción del proyecto
+
+        Esta aplicación integra los principales conceptos trabajados
+        durante el Módulo 1 de Python Fundamentals e incluye los 
+        siguientes ejercicios prácticos:
 
         **Ejercicio 1:** registro de movimientos financieros mediante
         una lista y cálculo del flujo de caja.
@@ -82,19 +73,28 @@ if modulos == "Home":
         librería externa, implementando operaciones CRUD
         (Crear, Leer, Actualizar y Eliminar).
 
-        Selecciona una opción en el menú lateral para comenzar.
         """
     )
 
-    st.markdown("### 🛠️ Tecnologías utilizadas")
-    st.write("• Python")
-    st.write("• Streamlit")
-    st.write("• NumPy")
-    st.write("• Pandas")
-    st.write("• Programación funcional")
-    st.write("• Programación orientada a objetos")
+    st.markdown("# 🛠️ Tecnologías utilizadas")
 
+    col1, col2 = st.columns(2)
 
+    with col1:
+        st.write("• Python")
+        st.write("• Streamlit")
+        st.write("• NumPy")
+
+    with col2:
+        st.write("• Pandas")
+        st.write("• Programación funcional")
+        st.write("• Programación orientada a objetos")
+
+    st.markdown(
+        """
+        ### 📌 Selecciona una opción en el menú lateral para comenzar.
+        """
+    )
 
 elif modulos == "Ejercicio 1":
   st.title("EJERCICIO 1")
