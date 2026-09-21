@@ -40,13 +40,13 @@ st.sidebar.caption(
 if modulos == "Home":
     st.title("Proyecto 1 – Especialización en Python for Analytics")
     st.subheader("Módulo 1: Python Fundamentals")
-    st.image("Python_logo.png",width =150)
+    st.image("Python_logo.png",width =120)
        
     st.markdown("---")
 
     st.markdown("### 👤 Datos del estudiante")
     st.write(f"**Nombre:** Katia Roxana Mendez Cortez")
-    st.write("**Sobre mí:** Profesional Especialista en Control Interno, que disfruta de aprender tecnología")
+    st.write("**Sobre mí:** Profesional Especialista en Control Interno, que disfruta aprender de tecnología")
     st.write(f"**Año:** 2026")
 
     st.markdown("---")
@@ -57,8 +57,31 @@ if modulos == "Home":
         ### 📌 Descripción del proyecto
 
         Esta aplicación integra los principales conceptos trabajados
-        durante el Módulo 1 de Python Fundamentals e incluye los 
-        siguientes ejercicios prácticos:
+        durante el Módulo 1 de Python Fundamentals.
+        
+        """
+    )
+
+    st.markdown("#### 🛠️ Tecnologías utilizadas")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.write("• Python")
+        st.write("• Streamlit")
+
+    with col 2:
+        st.write("• NumPy")
+        st.write("• Pandas")
+        
+    with col3:
+        st.write("• Programación funcional")
+        st.write("• Programación orientada a objetos")
+
+
+    st.markdown(
+        """
+        #### 📌 Ejercicios incluidos
 
         **Ejercicio 1:** registro de movimientos financieros mediante
         una lista y cálculo del flujo de caja.
@@ -76,23 +99,9 @@ if modulos == "Home":
         """
     )
 
-    st.markdown("# 🛠️ Tecnologías utilizadas")
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.write("• Python")
-        st.write("• Streamlit")
-        st.write("• NumPy")
-
-    with col2:
-        st.write("• Pandas")
-        st.write("• Programación funcional")
-        st.write("• Programación orientada a objetos")
-
     st.markdown(
         """
-        ### 📌 Selecciona una opción en el menú lateral para comenzar.
+        #### Selecciona una opción en el menú lateral para comenzar.
         """
     )
 
