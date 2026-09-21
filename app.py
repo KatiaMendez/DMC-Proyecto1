@@ -286,7 +286,7 @@ elif modulos == "Ejercicio 1":
                         "valor": float(valor)
                     }
                 )
-                #st.session_state.e1_limpiar = True
+                st.session_state.e1_limpiar = True
                 st.success(
                     f'✅ El concepto "{concepto.strip()}" '
                     "se registró correctamente."
@@ -294,7 +294,7 @@ elif modulos == "Ejercicio 1":
 
                 # Actualiza la pantalla para mostrar
                 # inmediatamente los campos vacíos.
-                # st.rerun()
+                st.rerun()
 
 
     st.markdown("---")
