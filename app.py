@@ -228,10 +228,10 @@ elif modulos == "Ejercicio 1":
         
     st.subheader("Registrar movimiento")
 
-    if st.session_state.get("e1_limpiar", False):
-        st.session_state.e1_concepto = ""
-        st.session_state.e1_valor = 0.0
-        st.session_state.e1_limpiar = False
+    #if st.session_state.get("e1_limpiar", False):
+     #   st.session_state.e1_concepto = ""
+      #  st.session_state.e1_valor = 0.0
+       # st.session_state.e1_limpiar = False
 
     col1, col2, col3 = st.columns(3)
 
