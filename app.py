@@ -26,8 +26,8 @@ st.set_page_config(
 # ============================================================
 def inicializar_estado():
 
-    if "movimientos" not in st.session_state:
-        st.session_state.movimientos = [] # Crea una lista vacía
+    #if "movimientos" not in st.session_state:
+     #   st.session_state.movimientos = [] # Crea una lista vacía
 
     if "productos" not in st.session_state:
         st.session_state.productos = {
@@ -56,12 +56,12 @@ def mostrar_error(mensaje):
     st.error(f"⚠️ {mensaje}")
 
 
-def dataframe_movimientos():
-    """Convierte la lista de movimientos en DataFrame."""
-    if not st.session_state.movimientos:
-        return pd.DataFrame(columns=["Concepto", "Tipo", "Valor"])
+#def dataframe_movimientos():
+   # """Convierte la lista de movimientos en DataFrame."""
+    #if not st.session_state.movimientos:
+     #   return pd.DataFrame(columns=["Concepto", "Tipo", "Valor"])
 
-    return pd.DataFrame(st.session_state.movimientos)
+   # return pd.DataFrame(st.session_state.movimientos)
 
 
 def dataframe_productos():
