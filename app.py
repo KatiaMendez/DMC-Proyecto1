@@ -262,7 +262,6 @@ elif modulos == "Ejercicio 1":
         elif valor <= 0:
             st.warning("⚠️ El valor debe ser mayor que cero.")
         else:
-            # Normalizamos el concepto para comparar.
             concepto_normalizado = concepto.strip().lower()
 
             duplicado = any(
@@ -271,9 +270,6 @@ elif modulos == "Ejercicio 1":
                 for movimiento in st.session_state.movimientos
             )
 
-            # ------------------------------------------------
-            # Verificar concepto duplicado
-            # ------------------------------------------------
             if duplicado:
                 st.warning(
                     f'⚠️ El concepto "{concepto.strip()}" '
@@ -283,9 +279,6 @@ elif modulos == "Ejercicio 1":
                 )
 
             else:
-                # --------------------------------------------
-                # Agregar nuevo movimiento
-                # --------------------------------------------
                 st.session_state.movimientos.append(
                     {
                         "concepto": concepto.strip(),
@@ -294,11 +287,10 @@ elif modulos == "Ejercicio 1":
                     }
                 )
 
-                # --------------------------------------------
                 # Limpiar los campos después de guardar
-                # --------------------------------------------
                 st.session_state.e1_concepto = ""
                 st.session_state.e1_valor = 0.0
+                st.session_state.e1_tipo = "Ingreso"
 
                 st.success(
                     f'✅ El concepto "{concepto.strip()}" '
