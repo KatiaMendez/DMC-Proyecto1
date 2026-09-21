@@ -105,8 +105,124 @@ if modulos == "Home":
         """
     )
 
+# ============================================================
+# EJERCICIO 1
+# ============================================================
+
 elif modulos == "Ejercicio 1":
-  st.title("EJERCICIO 1")
+    st.title("💰 Ejercicio 1 – Flujo de caja con listas")
+
+    st.markdown(
+        """
+        En este ejercicio se registran movimientos financieros en una
+        lista. Cada movimiento contiene un concepto, un tipo
+        (Ingreso o Gasto) y un valor.
+        """
+    )
+
+    st.subheader("Registrar movimiento")
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        concepto = st.text_input(
+            "Concepto",
+            placeholder="Ej. Venta de producto",
+            key="e1_concepto",
+        )
+
+    with col2:
+        tipo = st.selectbox(
+            "Tipo de movimiento",
+            ["Ingreso", "Gasto"],
+            key="e1_tipo",
+        )
+
+    with col3:
+        valor = st.number_input(
+            "Valor",
+            min_value=0.01,
+            value=100.00,
+            step=10.00,
+            key="e1_valor",
+        )
+
+    if st.button(
+        "➕ Agregar movimiento",
+        type="primary",
+        key="e1_agregar",
+    ):
+        if not concepto.strip():
+            mostrar_error("Ingresa un concepto para el movimiento.")
+        elif valor <= 0:
+            mostrar_error("El valor debe ser mayor que cero.")
+        else:
+            st.session_state.movimientos.append(
+                {
+                    "Concepto": concepto.strip(),
+                    "Tipo": tipo,
+                    "Valor": float(valor),
+                }
+            )
+            st.success("Movimiento agregado correctamente.")
+
+    st.markdown("---")
+    st.subheader("Movimientos registrados")
+
+    df_movimientos = dataframe_movimientos()
+
+    if df_movimientos.empty:
+        st.info("Todavía no se han registrado movimientos.")
+    else:
+        st.dataframe(
+            df_movimientos,
+            use_container_width=True,
+            hide_index=True,
+        )
+
+        ingresos = df_movimientos.loc[
+            df_movimientos["Tipo"] == "Ingreso", "Valor"
+        ].sum()
+
+        gastos = df_movimientos.loc[
+            df_movimientos["Tipo"] == "Gasto", "Valor"
+        ].sum()
+
+        saldo = ingresos - gastos
+
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            st.metric("Total ingresos", f"S/ {ingresos:,.2f}")
+
+        with col2:
+            st.metric("Total gastos", f"S/ {gastos:,.2f}")
+
+        with col3:
+            st.metric("Saldo final", f"S/ {saldo:,.2f}")
+
+        if saldo >= 0:
+            st.success(
+                f"El flujo de caja está **a favor**. "
+                f"Saldo: S/ {saldo:,.2f}"
+            )
+        else:
+            st.error(
+                f"El flujo de caja está **en contra**. "
+                f"Saldo: S/ {saldo:,.2f}"
+            )
+
+    st.markdown("---")
+
+    if st.button("🗑️ Limpiar movimientos", key="e1_limpiar"):
+        st.session_state.movimientos = []
+        st.rerun()
+
+
+
+# ============================================================
+# EJERCICIO 2
+# ============================================================
 
 elif modulos == "Ejercicio 2":
   st.write("EJERCICIO 2")
