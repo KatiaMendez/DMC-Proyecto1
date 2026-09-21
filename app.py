@@ -210,11 +210,7 @@ if modulos == "Home":
 # ============================================================
 # EJERCICIO 1
 # ============================================================
-
-def limpiar_ejercicio_1():
-    st.session_state.e1_concepto = ""
-    st.session_state.e1_valor = 0.0
-    
+   
 elif modulos == "Ejercicio 1":
 
     if "movimientos" not in st.session_state:
