@@ -25,7 +25,7 @@ st.set_page_config(
 # SIDEBAR / NAVEGACIÓN
 # ============================================================
 st.sidebar.title("Python Fundamentals")
-st.sidebar.image("LogoKRMC.png")
+st.sidebar.image("DMC.png")
 st.sidebar.markdown("---")
 modulos = st.sidebar.selectbox("Menú principal",["Home", "Ejercicio 1", "Ejercicio 2", "Ejercicio 3", "Ejercicio 4"])
 st.sidebar.markdown("---")
@@ -40,12 +40,21 @@ st.sidebar.caption(
 if modulos == "Home":
     st.title("Proyecto 1 – Python Fundamentals")
     st.image("Python_logo.png",width =100)
-    st.subheader("Especialización Python for Analytics")
-    
+       
+    st.markdown("---")
+
+
+        st.markdown("### 👤 Datos del estudiante")
+        st.write(f"**Nombre:** Katia Roxana Mendez Cortez")
+        st.write("**Módulo:** Python Fundamentals")
+        
+        st.write(f"**Año:** 2026")
+
+    st.markdown("---")
+
     st.markdown(
         """
-        ### Presentación
-
+        
         Esta aplicación integra los principales conceptos trabajados
         durante el Módulo 1 de Python Fundamentals: variables,
         estructuras de datos, control de flujo, funciones,
@@ -55,27 +64,6 @@ if modulos == "Home":
         desarrollados con Streamlit.
         """
     )
-
-    st.markdown("---")
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.markdown("### 👤 Datos del estudiante")
-        st.write(f"**Nombre:** Katia Roxana Mendez Cortez")
-        st.write("**Módulo:** Python Fundamentals")
-        st.write(f"**Año:** 2026")
-
-    with col2:
-        st.markdown("### 🛠️ Tecnologías utilizadas")
-        st.write("• Python")
-        st.write("• Streamlit")
-        st.write("• NumPy")
-        st.write("• Pandas")
-        st.write("• Programación funcional")
-        st.write("• Programación orientada a objetos")
-
-    st.markdown("---")
 
     st.markdown(
         """
@@ -97,6 +85,15 @@ if modulos == "Home":
         Selecciona una opción en el menú lateral para comenzar.
         """
     )
+
+        st.markdown("### 🛠️ Tecnologías utilizadas")
+        st.write("• Python")
+        st.write("• Streamlit")
+        st.write("• NumPy")
+        st.write("• Pandas")
+        st.write("• Programación funcional")
+        st.write("• Programación orientada a objetos")
+
 
 
 elif modulos == "Ejercicio 1":
