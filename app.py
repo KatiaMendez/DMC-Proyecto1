@@ -299,7 +299,7 @@ elif modulos == "Ejercicio 1":
 
                 # Actualiza la pantalla para mostrar
                 # inmediatamente los campos vacíos.
-                st.rerun()
+                # st.rerun()
 
 
     st.markdown("---")
