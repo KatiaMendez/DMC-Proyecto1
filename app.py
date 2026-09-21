@@ -212,6 +212,10 @@ if modulos == "Home":
 # ============================================================
 
 elif modulos == "Ejercicio 1":
+
+    if "movimientos" not in st.session_state:
+        st.session_state.movimientos = [] # Crea una lista vacía
+    
     st.title("💰 Ejercicio 1 – Flujo de caja con listas")
 
     st.markdown(
@@ -229,7 +233,7 @@ elif modulos == "Ejercicio 1":
     with col1:
         concepto = st.text_input(
             "Concepto",
-            placeholder="Ej. Venta de producto",
+            placeholder="Ej. Venta de celular, Luz, Internet",
             key="e1_concepto",
         )
 
@@ -243,14 +247,10 @@ elif modulos == "Ejercicio 1":
     with col3:
         valor = st.number_input(
             "Valor",
-            min_value=0.01,
-            value=100.00,
+            min_value=0.0,
             step=10.00,
             key="e1_valor",
         )
-
-    if "movimientos" not in st.session_state:
-        st.session_state.movimientos = [] # Crea una lista vacía
         
     if st.button(
         "➕ Agregar movimiento",
@@ -258,18 +258,57 @@ elif modulos == "Ejercicio 1":
         key="e1_agregar",
     ):
         if not concepto.strip():
-            mostrar_error("Ingresa un concepto para el movimiento.")
+            st.warning("⚠️ Debes ingresar un concepto.")
         elif valor <= 0:
-            mostrar_error("El valor debe ser mayor que cero.")
+            st.warning("⚠️ El valor debe ser mayor que cero.")
         else:
-            st.session_state.movimientos.append(
-                {
-                    "Concepto": concepto.strip(),
-                    "Tipo": tipo,
-                    "Valor": float(valor),
-                }
+            # Normalizamos el concepto para comparar.
+            concepto_normalizado = concepto.strip().lower()
+
+            duplicado = any(
+                movimiento["concepto"].strip().lower()
+                == concepto_normalizado
+                for movimiento in st.session_state.movimientos
             )
-            st.success("Movimiento agregado correctamente.")
+
+            # ------------------------------------------------
+            # Verificar concepto duplicado
+            # ------------------------------------------------
+            if duplicado:
+                st.warning(
+                    f'⚠️ El concepto "{concepto.strip()}" '
+                    "ya se encuentra registrado. "
+                    "Por favor, cambia el nombre del concepto "
+                    "para poder diferenciarlo."
+                )
+
+            else:
+                # --------------------------------------------
+                # Agregar nuevo movimiento
+                # --------------------------------------------
+                st.session_state.movimientos.append(
+                    {
+                        "concepto": concepto.strip(),
+                        "tipo": tipo,
+                        "valor": float(valor)
+                    }
+                )
+
+                # --------------------------------------------
+                # Limpiar los campos después de guardar
+                # --------------------------------------------
+                st.session_state.e1_concepto = ""
+                st.session_state.e1_valor = 0.0
+
+                st.success(
+                    f'✅ El concepto "{concepto.strip()}" '
+                    "se registró correctamente."
+                )
+
+                # Actualiza la pantalla para mostrar
+                # inmediatamente los campos vacíos.
+                st.rerun()
+
 
     st.markdown("---")
     st.subheader("Movimientos registrados")
