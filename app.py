@@ -62,7 +62,7 @@ if modulos == "Home":
         """
     )
 
-    st.markdown("#### 🛠️ Tecnologías utilizadas")
+    st.markdown("##### Tecnologías utilizadas")
 
     col1, col2, col3 = st.columns(3)
 
@@ -81,7 +81,7 @@ if modulos == "Home":
 
     st.markdown(
         """
-        #### 📌 Ejercicios incluidos
+        ##### Ejercicios incluidos
 
         **Ejercicio 1:** registro de movimientos financieros mediante
         una lista y cálculo del flujo de caja.
@@ -101,7 +101,7 @@ if modulos == "Home":
 
     st.markdown(
         """
-        #### Selecciona una opción en el menú lateral para comenzar.
+        ##### Selecciona una opción en el menú lateral para comenzar.
         """
     )
 
