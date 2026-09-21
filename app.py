@@ -1,5 +1,5 @@
 # ============================================================
-# Importar librerías estándar
+# IMPORTAR LIBRERÍAS ESTÁNDAR
 # ============================================================
 import streamlit as st
 import pandas as pd
@@ -24,7 +24,8 @@ st.set_page_config(
 # ============================================================
 # SIDEBAR / NAVEGACIÓN
 # ============================================================
-st.sidebar.title("🐍 Python Fundamentals")
+st.sidebar.title("Python Fundamentals")
+st.sidebar.image("DMC.png")
 st.sidebar.markdown("---")
 modulos = st.sidebar.selectbox("Menú principal",["Home", "Ejercicio 1", "Ejercicio 2", "Ejercicio 3", "Ejercicio 4"])
 st.sidebar.markdown("---")
@@ -37,9 +38,10 @@ st.sidebar.caption(
 # HOME
 # ============================================================
 if modulos == "Home":
-    st.title("🐍 Proyecto 1 – Python Fundamentals")
+    st.title("Proyecto 1 – Python Fundamentals")
+    st.image("Python_logo.png",width =100)
     st.subheader("Especialización Python for Analytics")
-
+    
     st.markdown(
         """
         ### Presentación
