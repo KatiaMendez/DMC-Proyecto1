@@ -119,7 +119,10 @@ elif modulos == "Ejercicio 1":
         (Ingreso o Gasto) y un valor.
         """
     )
-
+    
+    if "movimientos" not in st.session_state:
+        st.session_state.movimientos = []
+        
     st.subheader("Registrar movimiento")
 
     col1, col2, col3 = st.columns(3)
