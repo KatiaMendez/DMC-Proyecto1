@@ -64,13 +64,13 @@ if modulos == "Home":
 
     st.markdown("#### 🛠️ Tecnologías utilizadas")
 
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
 
     with col1:
         st.write("• Python")
         st.write("• Streamlit")
 
-    with col 2:
+    with col2:
         st.write("• NumPy")
         st.write("• Pandas")
         
