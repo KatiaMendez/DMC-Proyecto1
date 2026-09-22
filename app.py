@@ -215,6 +215,9 @@ elif modulos == "Ejercicio 1":
 
     if "movimientos" not in st.session_state:
         st.session_state.movimientos = [] # Crea una lista vacía
+
+    if "e1_reset_form" not in st.session_state:
+        st.session_state.e1_reset_form = False
     
     st.title("💰 Ejercicio 1 – Flujo de caja con listas")
 
@@ -228,10 +231,10 @@ elif modulos == "Ejercicio 1":
         
     st.subheader("Registrar movimiento")
 
-    if st.session_state.get("e1_limpiar", False):
+    if st.session_state.e1_reset_form:
         st.session_state.e1_concepto = ""
         st.session_state.e1_valor = 0.0
-        st.session_state.e1_limpiar = False
+        st.session_state.e1_reset_form = False
 
     col1, col2, col3 = st.columns(3)
 
@@ -291,14 +294,15 @@ elif modulos == "Ejercicio 1":
                         "valor": float(valor)
                     }
                 )
-                st.session_state.e1_limpiar = True
+                
                 st.success(
                     f'✅ El concepto "{concepto.strip()}" '
                     "se registró correctamente."
                 )
 
+                st.session_state.e1_reset_form = True
+
                 # Actualiza la pantalla para mostrar
-                # inmediatamente los campos vacíos.
                 st.rerun()
 
 
@@ -352,6 +356,8 @@ elif modulos == "Ejercicio 1":
 
     if st.button("🗑️ Limpiar todos los movimientos", key="e1_limpiar"):
         st.session_state.movimientos = []
+        st.session_state.e1_concepto = ""
+        st.session_state.e1_valor = 0.0
         st.rerun()
 
 
@@ -618,7 +624,7 @@ elif modulos == "Ejercicio 3":
     else:
         st.info("Todavía no se ha ejecutado la función.")
 
-    if st.button("🗑️ Limpiar histórico", key="e3_limpiar"):
+    if st.button("🗑️ Limpiar histórico", key="e1_limpiar"):
         st.session_state.historial_punto_equilibrio = []
         st.rerun()
 
