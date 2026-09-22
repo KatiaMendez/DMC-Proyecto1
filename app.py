@@ -619,7 +619,7 @@ else:
         st.session_state.inventario_crud = []
 
     if "e4_actualizar_version" not in st.session_state:
-    st.session_state.e4_actualizar_version = 0
+        st.session_state.e4_actualizar_version = 0
     
     st.markdown(
         """
