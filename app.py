@@ -218,9 +218,6 @@ elif modulos == "Ejercicio 1":
 
     if "e1_reset_form" not in st.session_state:
         st.session_state.e1_reset_form = False
-
-    if "e1_dataframe_version" not in st.session_state:
-    st.session_state.e1_dataframe_version = 0
     
 
     st.title("💰 Ejercicio 1 – Flujo de caja con listas")
@@ -308,7 +305,6 @@ elif modulos == "Ejercicio 1":
 
                 st.session_state.e1_reset_form = True
 
-                # Actualiza la pantalla para mostrar
                 st.rerun()
 
     st.markdown("---")
@@ -329,7 +325,7 @@ elif modulos == "Ejercicio 1":
             hide_index=True,
             on_select="rerun",
             selection_mode="single-row",
-            key=f"e1_dataframe_{st.session_state.e1_dataframe_version}",
+            key=f"e1_dataframe",
         )
 
 
