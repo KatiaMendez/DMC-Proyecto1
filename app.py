@@ -316,10 +316,6 @@ elif modulos == "Ejercicio 1":
     if df_movimientos.empty:
         st.info("Todavía no se han registrado movimientos.")
     else:
-
-
-        
-
         st.caption(
             "💡 Para eliminar una fila, selecciona el registro haciendo clic sobre la fila."
         )
@@ -339,15 +335,11 @@ elif modulos == "Ejercicio 1":
         )
 
 
-
         if filas_seleccionadas:
-
-            # Obtener posición de la fila
             fila_seleccionada = (
                 filas_seleccionadas[0]
             )
 
-            # Obtener información del registro
             registro_seleccionado = (
                 df_movimientos.iloc[
                     fila_seleccionada
@@ -365,10 +357,6 @@ elif modulos == "Ejercicio 1":
             valor_seleccionado = (
                 registro_seleccionado["valor"]
             )
-
-            # --------------------------------------------------
-            # MOSTRAR REGISTRO SELECCIONADO
-            # --------------------------------------------------
 
             st.info(
                 f"📌 **Registro seleccionado:** "
@@ -394,18 +382,6 @@ elif modulos == "Ejercicio 1":
                 )
 
                 st.rerun()
-
-
-
-
-
-
-        
-#        st.dataframe(
-#            df_movimientos,
-#            use_container_width=True,
-#            hide_index=True,
-#        )
 
         ingresos = df_movimientos.loc[
             df_movimientos["tipo"] == "Ingreso", "valor"
