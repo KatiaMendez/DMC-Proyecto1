@@ -408,7 +408,7 @@ elif modulos == "Ejercicio 1":
                 f"El flujo de caja está **a favor**. "
                 f"Saldo: S/ {saldo:,.2f}"
             )
-        elif saldo = 0:
+        elif saldo == 0:
             st.success(
                 f"El flujo de caja es **neutro**. "
                 f"Saldo: S/ {saldo:,.2f}"
