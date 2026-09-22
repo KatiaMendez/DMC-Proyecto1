@@ -52,52 +52,6 @@ def mostrar_error(mensaje):
     """Muestra un mensaje de error uniforme."""
     st.error(f"⚠️ {mensaje}")
 
-
-
-def dataframe_inventario():
-    """Genera el DataFrame de los objetos InventarioProducto."""
-    if not st.session_state.inventario_crud:
-        return pd.DataFrame(
-            columns=[
-                "ID",
-                "Producto",
-                "Costo unitario",
-                "Precio unitario",
-                "Stock actual",
-                "Stock mínimo",
-                "Valor inventario",
-                "Margen unitario",
-                "Margen %",
-                "Reposición",
-            ]
-        )
-
-    registros = []
-
-    for indice, producto in enumerate(
-        st.session_state.inventario_crud, start=1
-    ):
-        resumen = producto.resumen()
-
-        registros.append(
-            {
-                "ID": indice,
-                "Producto": resumen["producto"],
-                "Costo unitario": producto.costo_unitario,
-                "Precio unitario": producto.precio_unitario,
-                "Stock actual": resumen["stock_actual"],
-                "Stock mínimo": producto.stock_minimo,
-                "Valor inventario": resumen["valor_inventario"],
-                "Margen unitario": resumen["margen_unitario"],
-                "Margen %": resumen["margen_pct"],
-                "Reposición": (
-                    "Sí" if resumen["necesita_reposicion"] else "No"
-                ),
-            }
-        )
-
-    return pd.DataFrame(registros)
-
 # ============================================================
 # SIDEBAR / NAVEGACIÓN
 # ============================================================
@@ -790,7 +744,50 @@ else:
     with tab_leer:
         st.subheader("Registros del inventario")
 
-        df_inventario = dataframe_inventario()
+        if not st.session_state.inventario_crud:
+            df_inventario = pd.DataFrame(
+                    columns=[
+                        "ID",
+                        "Producto",
+                        "Costo unitario",
+                        "Precio unitario",
+                        "Stock actual",
+                        "Stock mínimo",
+                        "Valor inventario",
+                        "Margen unitario",
+                        "Margen %",
+                        "Reposición",
+                    ]
+                )
+        
+        registros = []
+    
+        for indice, producto in enumerate(
+            st.session_state.inventario_crud, start=1
+        ):
+            resumen = producto.resumen()
+    
+            registros.append(
+                {
+                    "ID": indice,
+                    "Producto": resumen["producto"],
+                    "Costo unitario": producto.costo_unitario,
+                    "Precio unitario": producto.precio_unitario,
+                    "Stock actual": resumen["stock_actual"],
+                    "Stock mínimo": producto.stock_minimo,
+                    "Valor inventario": resumen["valor_inventario"],
+                    "Margen unitario": resumen["margen_unitario"],
+                    "Margen %": resumen["margen_pct"],
+                    "Reposición": (
+                        "Sí" if resumen["necesita_reposicion"] else "No"
+                    ),
+                }
+            )
+        
+  
+
+
+        
 
         if df_inventario.empty:
             st.info("No existen registros en el inventario.")
