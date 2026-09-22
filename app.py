@@ -8,7 +8,7 @@ import numpy as np
 # ============================================================
 # LIBRERÍAS EXTERNAS DEL PROYECTO
 # ============================================================
-from libreria_funciones_proyecto1 as lf
+import libreria_funciones_proyecto1 as lf
 from librería_clases_proyecto1 import InventarioProducto
 
 # ============================================================
