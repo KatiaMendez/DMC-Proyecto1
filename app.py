@@ -335,35 +335,23 @@ elif modulos == "Ejercicio 1":
 
 
         if filas_seleccionadas:
-            fila_seleccionada = (
-                filas_seleccionadas[0]
-            )
+            fila_seleccionada = filas_seleccionadas[0]
+        
+            if 0 <= fila_seleccionada < len(df_movimientos):
+                registro_seleccionado = df_movimientos.iloc[fila_seleccionada]
+        
+                concepto_seleccionado = registro_seleccionado["concepto"]
+                tipo_seleccionado = registro_seleccionado["tipo"]
+                valor_seleccionado = registro_seleccionado["valor"]
+        
+                st.info(
+                    f"📌 **Registro seleccionado:** "
+                    f"{concepto_seleccionado} | "
+                    f"{tipo_seleccionado} | "
+                    f"S/ {valor_seleccionado:,.2f}"
+                )
 
-            registro_seleccionado = (
-                df_movimientos.iloc[
-                    fila_seleccionada
-                ]
-            )
-
-            concepto_seleccionado = (
-                registro_seleccionado["concepto"]
-            )
-
-            tipo_seleccionado = (
-                registro_seleccionado["tipo"]
-            )
-
-            valor_seleccionado = (
-                registro_seleccionado["valor"]
-            )
-
-            st.info(
-                f"📌 **Registro seleccionado:** "
-                f"{concepto_seleccionado} | "
-                f"{tipo_seleccionado} | "
-                f"S/ {valor_seleccionado:,.2f}"
-            )
-
+        
 
             if st.button(
                 "🗑️ Eliminar registro seleccionado",
