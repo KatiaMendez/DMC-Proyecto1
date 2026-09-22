@@ -617,6 +617,9 @@ else:
 
     if "inventario_crud" not in st.session_state:
         st.session_state.inventario_crud = []
+
+    if "e4_actualizar_version" not in st.session_state:
+    st.session_state.e4_actualizar_version = 0
     
     st.markdown(
         """
@@ -817,7 +820,7 @@ else:
                 nuevo_nombre = st.text_input(
                     "Nombre",
                     value=producto_actual.nombre,
-                    key="e4_actualizar_nombre",
+                    key=f"e4_actualizar_nombre_{st.session_state.e4_actualizar_version}",
                 )
 
                 nuevo_costo = st.number_input(
@@ -825,7 +828,7 @@ else:
                     min_value=0.01,
                     value=float(producto_actual.costo_unitario),
                     step=10.00,
-                    key="e4_actualizar_costo",
+                    key=f"e4_actualizar_costo_{st.session_state.e4_actualizar_version}",
                 )
 
                 nuevo_precio = st.number_input(
@@ -833,7 +836,7 @@ else:
                     min_value=0.01,
                     value=float(producto_actual.precio_unitario),
                     step=10.00,
-                    key="e4_actualizar_precio",
+                    key=f"e4_actualizar_precio_{st.session_state.e4_actualizar_version}",
                 )
 
             with col2:
@@ -842,7 +845,7 @@ else:
                     min_value=0,
                     value=int(producto_actual.stock_actual),
                     step=1,
-                    key="e4_actualizar_stock",
+                    key=f"e4_actualizar_stock_{st.session_state.e4_actualizar_version}",
                 )
 
                 nuevo_stock_minimo = st.number_input(
@@ -850,7 +853,7 @@ else:
                     min_value=0,
                     value=int(producto_actual.stock_minimo),
                     step=1,
-                    key="e4_actualizar_minimo",
+                    key=f"e4_actualizar_minimo_{st.session_state.e4_actualizar_version}",
                 )
 
             if st.button(
@@ -876,9 +879,13 @@ else:
                         indice_actualizar
                     ] = producto_actualizado
 
+                    st.session_state.e4_actualizar_version += 1
+
                     st.success(
                         "Registro actualizado correctamente."
                     )
+
+                    st.rerun()
 
                 except ValueError as error:
                     mostrar_error(str(error))
