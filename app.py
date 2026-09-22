@@ -22,31 +22,7 @@ st.set_page_config(
 )
 
 # ============================================================
-# INICIALIZACIÓN DEL ESTADO DE LA APLICACIÓN
-# ============================================================
-def inicializar_estado():
-
-    if "productos" not in st.session_state:
-        st.session_state.productos = {
-            "nombre": np.array([], dtype=str),
-            "categoria": np.array([], dtype=str),
-            "precio": np.array([], dtype=float),
-            "cantidad": np.array([], dtype=int),
-            "total": np.array([], dtype=float),
-        }
-
-    if "historial_punto_equilibrio" not in st.session_state:
-        st.session_state.historial_punto_equilibrio = []
-
-    if "inventario_crud" not in st.session_state:
-        st.session_state.inventario_crud = []
-
-
-inicializar_estado()
-
-
-# ============================================================
-# FUNCIONES AUXILIARES DE LA APP
+# FUNCIONES ESTÁNDAR DE MENSAJE DE ERROR
 # ============================================================
 def mostrar_error(mensaje):
     """Muestra un mensaje de error uniforme."""
@@ -352,6 +328,15 @@ elif modulos == "Ejercicio 1":
 elif modulos == "Ejercicio 2":
     st.title("📊 Ejercicio 2 – Registro con NumPy, arrays y DataFrame")
 
+    if "productos" not in st.session_state:
+        st.session_state.productos = {
+            "nombre": np.array([], dtype=str),
+            "categoria": np.array([], dtype=str),
+            "precio": np.array([], dtype=float),
+            "cantidad": np.array([], dtype=int),
+            "total": np.array([], dtype=float),
+        }
+
     st.markdown(
         """
         Este ejercicio utiliza **arrays de NumPy** para almacenar
@@ -482,6 +467,9 @@ elif modulos == "Ejercicio 2":
 elif modulos == "Ejercicio 3":
     st.title("📈 Ejercicio 3 – Función desde una librería externa")
 
+    if "historial_punto_equilibrio" not in st.session_state:
+        st.session_state.historial_punto_equilibrio = []
+    
     st.markdown(
         """
         Para este ejercicio se utiliza una función importada desde
@@ -628,6 +616,9 @@ elif modulos == "Ejercicio 3":
 else:
     st.title("📦 Ejercicio 4 – Clase externa con CRUD")
 
+    if "inventario_crud" not in st.session_state:
+        st.session_state.inventario_crud = []
+    
     st.markdown(
         """
         Para este ejercicio se utiliza la clase
