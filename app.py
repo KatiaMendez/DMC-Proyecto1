@@ -218,6 +218,9 @@ elif modulos == "Ejercicio 1":
 
     if "e1_reset_form" not in st.session_state:
         st.session_state.e1_reset_form = False
+
+    if "e1_dataframe_version" not in st.session_state:
+    st.session_state.e1_dataframe_version = 0
     
 
     st.title("💰 Ejercicio 1 – Flujo de caja con listas")
@@ -325,7 +328,7 @@ elif modulos == "Ejercicio 1":
             hide_index=True,
             on_select="rerun",
             selection_mode="single-row",
-            key=f"e1_dataframe",
+            key=f"e1_dataframe_{st.session_state.e1_dataframe_version}",
         )
 
 
@@ -358,16 +361,14 @@ elif modulos == "Ejercicio 1":
                 key="e1_eliminar_seleccionado",
             ):
     
-                st.session_state.movimientos.pop(
-                    fila_seleccionada
-                )
+                st.session_state.movimientos.pop(fila_seleccionada)
 
                 st.success(
                     f'✅ El registro '
                     f'"{concepto_seleccionado}" '
                     "fue eliminado correctamente."
                 )
-
+                st.session_state.e1_dataframe_version += 1
                 st.rerun()
 
         ingresos = df_movimientos.loc[
