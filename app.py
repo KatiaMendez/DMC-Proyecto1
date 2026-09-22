@@ -9,8 +9,7 @@ import numpy as np
 # LIBRERÍAS EXTERNAS DEL PROYECTO
 # ============================================================
 import libreria_funciones_proyecto1 as lf
-from librería_clases_proyecto1 import InventarioProducto
-
+import librería_clases_proyecto1 as lc
 # ============================================================
 # CONFIGURACIÓN GENERAL
 # ============================================================
@@ -712,7 +711,7 @@ else:
                         "El nombre del producto es obligatorio."
                     )
 
-                nuevo_producto = InventarioProducto(
+                nuevo_producto = lc.InventarioProducto(
                     nombre=nombre.strip(),
                     costo_unitario=float(costo_unitario),
                     precio_unitario=float(precio_unitario),
@@ -865,7 +864,7 @@ else:
                             "El nombre del producto es obligatorio."
                         )
 
-                    producto_actualizado = InventarioProducto(
+                    producto_actualizado = lc.InventarioProducto(
                         nombre=nuevo_nombre.strip(),
                         costo_unitario=float(nuevo_costo),
                         precio_unitario=float(nuevo_precio),
