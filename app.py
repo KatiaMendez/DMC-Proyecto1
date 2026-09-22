@@ -320,8 +320,7 @@ elif modulos == "Ejercicio 1":
         
 
         st.caption(
-            "💡 Selecciona un registro haciendo clic sobre la fila "
-            "que deseas eliminar."
+            "💡 Para eliminar una fila, selecciona el registro haciendo clic sobre la fila."
         )
 
         evento = st.dataframe(
@@ -333,17 +332,12 @@ elif modulos == "Ejercicio 1":
             key="e1_dataframe",
         )
 
-        # ==================================================
-        # OBTENER FILA SELECCIONADA
-        # ==================================================
 
         filas_seleccionadas = (
             evento.selection.rows
         )
 
-        # ==================================================
-        # MOSTRAR OPCIÓN DE ELIMINACIÓN
-        # ==================================================
+
 
         if filas_seleccionadas:
 
@@ -382,9 +376,6 @@ elif modulos == "Ejercicio 1":
                 f"S/ {valor_seleccionado:,.2f}"
             )
 
-            # --------------------------------------------------
-            # BOTÓN ELIMINAR
-            # --------------------------------------------------
 
             if st.button(
                 "🗑️ Eliminar registro seleccionado",
@@ -412,11 +403,11 @@ elif modulos == "Ejercicio 1":
 
 
         
-        st.dataframe(
-            df_movimientos,
-            use_container_width=True,
-            hide_index=True,
-        )
+#        st.dataframe(
+#            df_movimientos,
+#            use_container_width=True,
+#            hide_index=True,
+#        )
 
         ingresos = df_movimientos.loc[
             df_movimientos["tipo"] == "Ingreso", "valor"
