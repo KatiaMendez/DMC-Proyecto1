@@ -8,7 +8,7 @@ import numpy as np
 # ============================================================
 # LIBRERÍAS EXTERNAS DEL PROYECTO
 # ============================================================
-from libreria_funciones_proyecto1 import calcular_punto_equilibrio
+from libreria_funciones_proyecto1 as lf
 from librería_clases_proyecto1 import InventarioProducto
 
 # ============================================================
@@ -537,7 +537,7 @@ elif modulos == "Ejercicio 3":
             key="e3_ejecutar",
         ):
             try:
-                resultado = calcular_punto_equilibrio(
+                resultado = lf.calcular_punto_equilibrio(
                     costos_fijos=costos_fijos,
                     precio_unitario=precio_unitario,
                     costo_variable_unitario=costo_variable_unitario,
