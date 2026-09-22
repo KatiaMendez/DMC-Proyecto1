@@ -285,7 +285,7 @@ elif modulos == "Ejercicio 1":
             )
 
             if duplicado:
-                st.warning(
+                st.error(
                     f'⚠️ El concepto "{concepto.strip()}" '
                     "ya se encuentra registrado. "
                     "Por favor, cambia el nombre del concepto "
