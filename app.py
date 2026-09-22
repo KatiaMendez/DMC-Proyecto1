@@ -220,7 +220,7 @@ elif modulos == "Ejercicio 1":
         st.session_state.e1_reset_form = False
 
     if "e1_dataframe_version" not in st.session_state:
-    st.session_state.e1_dataframe_version = 0
+        st.session_state.e1_dataframe_version = 0
     
 
     st.title("💰 Ejercicio 1 – Flujo de caja con listas")
