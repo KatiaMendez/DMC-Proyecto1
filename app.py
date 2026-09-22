@@ -935,10 +935,3 @@ else:
                 st.rerun()
 
 
-# ============================================================
-# PIE DE PÁGINA
-# ============================================================
-st.sidebar.markdown("---")
-st.sidebar.caption(
-    "Proyecto 1 · Python Fundamentals · Streamlit"
-)
