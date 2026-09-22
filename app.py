@@ -218,7 +218,8 @@ elif modulos == "Ejercicio 1":
 
     if "e1_reset_form" not in st.session_state:
         st.session_state.e1_reset_form = False
-    
+
+
     st.title("💰 Ejercicio 1 – Flujo de caja con listas")
 
     st.markdown(
@@ -314,6 +315,103 @@ elif modulos == "Ejercicio 1":
     if df_movimientos.empty:
         st.info("Todavía no se han registrado movimientos.")
     else:
+
+
+        
+
+        st.caption(
+            "💡 Selecciona un registro haciendo clic sobre la fila "
+            "que deseas eliminar."
+        )
+
+        evento = st.dataframe(
+            df_movimientos,
+            use_container_width=True,
+            hide_index=True,
+            on_select="rerun",
+            selection_mode="single-row",
+            key="e1_dataframe",
+        )
+
+        # ==================================================
+        # OBTENER FILA SELECCIONADA
+        # ==================================================
+
+        filas_seleccionadas = (
+            evento.selection.rows
+        )
+
+        # ==================================================
+        # MOSTRAR OPCIÓN DE ELIMINACIÓN
+        # ==================================================
+
+        if filas_seleccionadas:
+
+            # Obtener posición de la fila
+            fila_seleccionada = (
+                filas_seleccionadas[0]
+            )
+
+            # Obtener información del registro
+            registro_seleccionado = (
+                df_movimientos.iloc[
+                    fila_seleccionada
+                ]
+            )
+
+            concepto_seleccionado = (
+                registro_seleccionado["concepto"]
+            )
+
+            tipo_seleccionado = (
+                registro_seleccionado["tipo"]
+            )
+
+            valor_seleccionado = (
+                registro_seleccionado["valor"]
+            )
+
+            # --------------------------------------------------
+            # MOSTRAR REGISTRO SELECCIONADO
+            # --------------------------------------------------
+
+            st.info(
+                f"📌 **Registro seleccionado:** "
+                f"{concepto_seleccionado} | "
+                f"{tipo_seleccionado} | "
+                f"S/ {valor_seleccionado:,.2f}"
+            )
+
+            # --------------------------------------------------
+            # BOTÓN ELIMINAR
+            # --------------------------------------------------
+
+            if st.button(
+                "🗑️ Eliminar registro seleccionado",
+                type="secondary",
+                key="e1_eliminar_seleccionado",
+            ):
+
+                # Eliminar el registro de la lista
+                st.session_state.movimientos.pop(
+                    fila_seleccionada
+                )
+
+                st.success(
+                    f'✅ El registro '
+                    f'"{concepto_seleccionado}" '
+                    "fue eliminado correctamente."
+                )
+
+                # Actualizar pantalla
+                st.rerun()
+
+
+
+
+
+
+        
         st.dataframe(
             df_movimientos,
             use_container_width=True,
