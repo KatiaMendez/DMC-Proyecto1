@@ -306,7 +306,7 @@ elif modulos == "Ejercicio 1":
                 # Actualiza la pantalla para mostrar
                 st.rerun()
 
-
+    st.caption("No se permiten conceptos duplicados")
     st.markdown("---")
     st.subheader("Movimientos registrados")
 
