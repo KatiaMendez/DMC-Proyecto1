@@ -285,8 +285,8 @@ elif modulos == "Ejercicio 1":
             )
 
             if duplicado:
-                st.error(
-                    f'⚠️ El concepto "{concepto.strip()}" '
+                mostrar_error(
+                    f'El concepto "{concepto.strip()}" '
                     "ya se encuentra registrado. "
                     "Por favor, cambia el nombre del concepto "
                     "para poder diferenciarlo."
@@ -432,7 +432,6 @@ elif modulos == "Ejercicio 2":
     )
 
     st.subheader("Registrar producto")
-
 
 
     col1, col2 = st.columns(2)
