@@ -403,7 +403,7 @@ elif modulos == "Ejercicio 1":
                 f"Saldo: S/ {saldo:,.2f}"
             )
         else:
-            st.error(
+            mostrar_error(
                 f"El flujo de caja está **en contra**. "
                 f"Saldo: S/ {saldo:,.2f}"
             )
