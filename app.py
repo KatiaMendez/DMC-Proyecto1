@@ -26,9 +26,6 @@ st.set_page_config(
 # ============================================================
 def inicializar_estado():
 
-    #if "movimientos" not in st.session_state:
-     #   st.session_state.movimientos = [] # Crea una lista vacía
-
     if "productos" not in st.session_state:
         st.session_state.productos = {
             "nombre": np.array([], dtype=str),
@@ -55,28 +52,6 @@ def mostrar_error(mensaje):
     """Muestra un mensaje de error uniforme."""
     st.error(f"⚠️ {mensaje}")
 
-
-#def dataframe_movimientos():
-   # """Convierte la lista de movimientos en DataFrame."""
-    #if not st.session_state.movimientos:
-     #   return pd.DataFrame(columns=["Concepto", "Tipo", "Valor"])
-
-   # return pd.DataFrame(st.session_state.movimientos)
-
-
-def dataframe_productos():
-    """Convierte los arrays de productos en DataFrame."""
-    datos = st.session_state.productos
-
-    return pd.DataFrame(
-        {
-            "Producto": datos["nombre"],
-            "Categoría": datos["categoria"],
-            "Precio": datos["precio"],
-            "Cantidad": datos["cantidad"],
-            "Total": datos["total"],
-        }
-    )
 
 
 def dataframe_inventario():
@@ -506,7 +481,17 @@ elif modulos == "Ejercicio 2":
     st.markdown("---")
     st.subheader("DataFrame actualizado")
 
-    df_productos = dataframe_productos()
+    datos = st.session_state.productos
+    df_productos = pd.DataFrame(
+        {
+            "Producto": datos["nombre"],
+            "Categoría": datos["categoria"],
+            "Precio": datos["precio"],
+            "Cantidad": datos["cantidad"],
+            "Total": datos["total"],
+        }
+    )
+
 
     if df_productos.empty:
         st.info("Todavía no existen productos registrados.")
