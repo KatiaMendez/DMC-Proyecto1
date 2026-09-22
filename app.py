@@ -260,7 +260,9 @@ elif modulos == "Ejercicio 1":
             step=10.00,
             key="e1_valor",
         )
-        
+
+    st.caption("ℹ️ No se permiten conceptos duplicados.")
+    
     if st.button(
         "➕ Agregar movimiento",
         type="primary",
@@ -306,7 +308,6 @@ elif modulos == "Ejercicio 1":
                 # Actualiza la pantalla para mostrar
                 st.rerun()
 
-    st.caption("No se permiten conceptos duplicados")
     st.markdown("---")
     st.subheader("Movimientos registrados")
 
@@ -379,11 +380,9 @@ elif modulos == "Ejercicio 1":
 
             if st.button(
                 "🗑️ Eliminar registro seleccionado",
-                type="secondary",
                 key="e1_eliminar_seleccionado",
             ):
-
-                # Eliminar el registro de la lista
+    
                 st.session_state.movimientos.pop(
                     fila_seleccionada
                 )
@@ -394,7 +393,6 @@ elif modulos == "Ejercicio 1":
                     "fue eliminado correctamente."
                 )
 
-                # Actualizar pantalla
                 st.rerun()
 
 
