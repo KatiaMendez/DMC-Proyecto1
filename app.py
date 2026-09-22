@@ -214,11 +214,14 @@ if modulos == "Home":
 elif modulos == "Ejercicio 1":
 
     if "movimientos" not in st.session_state:
-        st.session_state.movimientos = [] # Crea una lista vacía
+        st.session_state.movimientos = [] 
 
     if "e1_reset_form" not in st.session_state:
         st.session_state.e1_reset_form = False
 
+    if "e1_dataframe_version" not in st.session_state:
+    st.session_state.e1_dataframe_version = 0
+    
 
     st.title("💰 Ejercicio 1 – Flujo de caja con listas")
 
@@ -326,7 +329,7 @@ elif modulos == "Ejercicio 1":
             hide_index=True,
             on_select="rerun",
             selection_mode="single-row",
-            key="e1_dataframe",
+            key=f"e1_dataframe_{st.session_state.e1_dataframe_version}",
         )
 
 
