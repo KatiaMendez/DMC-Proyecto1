@@ -738,28 +738,13 @@ else:
             except ValueError as error:
                 mostrar_error(str(error))
 
+
     # --------------------------------------------------------
     # READ
     # --------------------------------------------------------
     with tab_leer:
         st.subheader("Registros del inventario")
-
-        if not st.session_state.inventario_crud:
-            pd.DataFrame(
-                    columns=[
-                        "ID",
-                        "Producto",
-                        "Costo unitario",
-                        "Precio unitario",
-                        "Stock actual",
-                        "Stock mínimo",
-                        "Valor inventario",
-                        "Margen unitario",
-                        "Margen %",
-                        "Reposición",
-                    ]
-                )
-        
+    
         registros = []
     
         for indice, producto in enumerate(
@@ -783,12 +768,10 @@ else:
                     ),
                 }
             )
-        
-        df_inventario = registros
-
-
-        
-
+    
+        # Convertimos la lista de registros en DataFrame
+        df_inventario = pd.DataFrame(registros)
+    
         if df_inventario.empty:
             st.info("No existen registros en el inventario.")
         else:
@@ -797,17 +780,17 @@ else:
                 use_container_width=True,
                 hide_index=True,
             )
-
+    
             valor_total = sum(
                 producto.valor_inventario()
                 for producto in st.session_state.inventario_crud
             )
-
+    
             st.metric(
                 "Valor total del inventario",
                 f"S/ {valor_total:,.2f}",
             )
-
+    
     # --------------------------------------------------------
     # UPDATE
     # --------------------------------------------------------
