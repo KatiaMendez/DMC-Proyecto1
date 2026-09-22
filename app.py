@@ -745,7 +745,7 @@ else:
         st.subheader("Registros del inventario")
 
         if not st.session_state.inventario_crud:
-            df_inventario = pd.DataFrame(
+            pd.DataFrame(
                     columns=[
                         "ID",
                         "Producto",
@@ -784,7 +784,7 @@ else:
                 }
             )
         
-  
+        df_inventario = registros
 
 
         
