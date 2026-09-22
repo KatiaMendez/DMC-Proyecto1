@@ -356,8 +356,6 @@ elif modulos == "Ejercicio 1":
 
     if st.button("🗑️ Limpiar todos los movimientos", key="e1_limpiar"):
         st.session_state.movimientos = []
-        st.session_state.e1_concepto = ""
-        st.session_state.e1_valor = 0.0
         st.rerun()
 
 
