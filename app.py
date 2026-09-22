@@ -603,7 +603,7 @@ elif modulos == "Ejercicio 3":
     else:
         st.info("Todavía no se ha ejecutado la función.")
 
-    if st.button("🗑️ Limpiar histórico", key="e1_limpiar"):
+    if st.button("🗑️ Limpiar histórico", key="e3_limpiar"):
         st.session_state.historial_punto_equilibrio = []
         st.rerun()
 
